@@ -11,4 +11,15 @@ class DogsController < ApplicationController
   def premier
     @dog = Dog.all.order("price DESC").first
   end
+
+  def new
+    @dog = Dog.new
+  end
+
+  def create
+    dog_params = params.require(:dog).permit(:name, :breed, :park, :price)
+    dog = Dog.create(dog_params)
+
+    redirect_to dogs_path
+  end
 end
